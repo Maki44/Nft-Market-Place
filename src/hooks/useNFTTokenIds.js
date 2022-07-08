@@ -20,9 +20,11 @@ export const useNFTTokenIds = (addr) => {
     address: addr,
     limit: 10,
   });
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(async () => {
+  console.log(token);
+  console.log("data", data);
+  console.log(isLoading);
+  console.log(error);
+  async function fetchData() {
     if (data?.result) {
       const NFTs = data.result;
       setTotalNFTs(data.total);
@@ -45,8 +47,12 @@ export const useNFTTokenIds = (addr) => {
       }
       setNFTTokenIds(NFTs);
     }
-  }, [data]);
+  }
 
+  useEffect(() => {
+    fetchData();
+  }, [data]);
+  console.log("nft", NFTTokenIds);
   return {
     getNFTTokenIds,
     NFTTokenIds,
